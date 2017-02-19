@@ -1,0 +1,84 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.sebhero.overwatch.PlaceholderFragment"
+    android:weightSum="1"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="IP:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/labelIp"
+            android:textAppearance="@android:style/TextAppearance.Medium" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:text="192.168.0.10"
+            android:ems="10"
+            android:id="@+id/edTxtIP" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="58dp">
+
+        <Button
+            android:text="connect"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnCon"
+            android:layout_weight="0.63"
+            android:background="@color/colorPrimary"
+            android:textColor="@android:color/white"
+            android:layout_width="wrap_content"
+            android:onClick="connect" />
+
+        <Space
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.63" />
+
+        <Button
+            android:text="Disconnect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnDis"
+            android:background="@android:color/holo_red_light"
+            android:textColor="@android:color/background_light"
+            style="@style/AlertDialog.AppCompat.Light"
+            android:onClick="disconnect" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="285dp">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/messages"
+                android:layout_weight="1" />
+        </ScrollView>
+    </LinearLayout>
+
+</LinearLayout>
