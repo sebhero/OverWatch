@@ -101,23 +101,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-//    public void onResume() {
-//        super.onResume();  // Always call the superclass method first
-//
-////        connectWebSocket(null);
-////        eventAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, this.events);
-//
-////        PlaceholderFragment.setEventAdapter(eventAdapter);
-//
-//    }
-
-
-
-
+    /**
+     * Connect to websocket
+     * @param view
+     */
     public void connect(View view) {
         connectWebSocket(view);
     }
 
+    /**
+     * Disconnect from websocket
+     * @param view
+     */
     public void disconnect(View view) {
         if (mWebSocketClient != null) {
             mWebSocketClient.close();
@@ -126,7 +121,10 @@ public class MainActivity extends AppCompatActivity {
         eventAdapter.notifyDataSetChanged();
     }
 
-
+    /**
+     * Display a notification in android menubar
+     * @param text text displayed in notification
+     */
     private void showNotification(String text) {
 
         //setup notification
@@ -147,7 +145,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
+    /**
+     * Connect to websocket
+     * @param view
+     */
     private void connectWebSocket(final View view) {
         String tag = "connectWS";
         URI uri;
@@ -181,8 +182,6 @@ public class MainActivity extends AppCompatActivity {
                     Snackbar.make(view, "Websocket success!", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 }
-
-                mWebSocketClient.send("Hello from " + Build.MANUFACTURER + " " + Build.MODEL);
             }
 
             @Override
@@ -193,22 +192,15 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void run() {
-                        Log.i("WS got", message);
                         try {
                             if (message.contains("AlarmEvent")) {
                                 String[] str = message.split("AlarmEvent");
-//                            Log.i("WS got",str[0]);
-//                                Log.i("WS got",str[1]);
                                 JSONObject json = new JSONObject(str[1]);
-                                Log.i("WS json","mag: "+json.getInt("magnetSensor"));
-                                Log.i("WS json","pir: "+json.getInt("pirSensor"));
-                                Log.i("WS json","timestamp: "+json.getLong("timestamp"));
-
 
                                 int mag =json.getInt("magnetSensor");
                                 int pir = json.getInt("pirSensor");
                                 long time= json.getLong("timestamp");
-                                SimpleDateFormat dateformatYYYYMMDD = new SimpleDateFormat("yyyyMMdd-HH:mm:ss");
+                                SimpleDateFormat dateformatYYYYMMDD = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                                 java.util.Date dateObj = new java.util.Date(time);
                                 StringBuilder nowYYYYMMDD = new StringBuilder( dateformatYYYYMMDD.format( dateObj ) );
                                 String msg = "";
@@ -223,9 +215,6 @@ public class MainActivity extends AppCompatActivity {
                                 events.add(msg);
                                 eventAdapter.notifyDataSetChanged();
                                 showNotification(msg);
-                            } else if (message.contains(".jpg")) {
-                                Log.i("WS json","pic!");
-//                                imageAdapter.addImage(message);
                             }
 
                         } catch (JSONException e) {
@@ -296,14 +285,12 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
             return PlaceholderFragment.newInstance(position + 1);
         }
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
+            // Show 2 total pages.
             return 2;
         }
 

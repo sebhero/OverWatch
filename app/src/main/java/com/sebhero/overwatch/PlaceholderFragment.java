@@ -53,13 +53,12 @@ public class PlaceholderFragment extends Fragment {
 
         View rootView = null;
         if (getArguments().getInt(ARG_SECTION_NUMBER) == 1) {
+            //main view
             rootView = inflater.inflate(R.layout.fragment_main, container, false);
-//                TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-//                textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
-            //txtb ip
             txtbIP = (EditText) rootView.findViewById(R.id.edTxtIP);
 
         } else if (getArguments().getInt(ARG_SECTION_NUMBER) == 2) {
+            //list view of all notificaitons
             rootView = inflater.inflate(R.layout.fragment_subpage1, container, false);
             ListView listV = (ListView) rootView.findViewById(R.id.listV);
             listV.setAdapter(eventAdapter);
