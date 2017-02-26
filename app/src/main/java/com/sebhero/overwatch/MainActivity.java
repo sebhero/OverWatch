@@ -1,4 +1,7 @@
 package com.sebhero.overwatch;
+/**
+ * @author Sebastian Boreback, Jonatan Fridsten
+ */
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -20,7 +23,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.drafts.Draft_17;
@@ -72,27 +74,13 @@ public class MainActivity extends AppCompatActivity {
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
 
-
         // Set up the ViewPager with the sections eventAdapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-
-
-//        events.add("");
         eventAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, this.events);
 
         PlaceholderFragment.setEventAdapter(eventAdapter);
-
-
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                connectWebSocket(view);
-//            }
-//        });
 
         //notifications
         notification = new NotificationCompat.Builder(this);
@@ -103,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Connect to websocket
+     *
      * @param view
      */
     public void connect(View view) {
@@ -111,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Disconnect from websocket
+     *
      * @param view
      */
     public void disconnect(View view) {
@@ -123,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Display a notification in android menubar
+     *
      * @param text text displayed in notification
      */
     private void showNotification(String text) {
@@ -147,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Connect to websocket
+     *
      * @param view
      */
     private void connectWebSocket(final View view) {
@@ -161,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
         }
         try {
 
-            uri = new URI("ws://" + url+ ":8080/alarms");
+            uri = new URI("ws://" + url + ":8080/alarms");
             Log.e(tag, "connect to " + uri.toASCIIString());
         } catch (URISyntaxException e) {
             e.printStackTrace();
@@ -197,19 +189,19 @@ public class MainActivity extends AppCompatActivity {
                                 String[] str = message.split("AlarmEvent");
                                 JSONObject json = new JSONObject(str[1]);
 
-                                int mag =json.getInt("magnetSensor");
+                                int mag = json.getInt("magnetSensor");
                                 int pir = json.getInt("pirSensor");
-                                long time= json.getLong("timestamp");
+                                long time = json.getLong("timestamp");
                                 SimpleDateFormat dateformatYYYYMMDD = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                                 java.util.Date dateObj = new java.util.Date(time);
-                                StringBuilder nowYYYYMMDD = new StringBuilder( dateformatYYYYMMDD.format( dateObj ) );
+                                StringBuilder nowYYYYMMDD = new StringBuilder(dateformatYYYYMMDD.format(dateObj));
                                 String msg = "";
                                 if (mag == 1) {
-                                    msg = "Magnet alarm:\t"+nowYYYYMMDD;
+                                    msg = "Magnet alarm:\t" + nowYYYYMMDD;
                                 } else if (pir == 1) {
-                                    msg = "PIR alarm:\t"+nowYYYYMMDD;
+                                    msg = "PIR alarm:\t" + nowYYYYMMDD;
                                 } else {
-                                    msg = "Magnet and PIR alarm:\t"+nowYYYYMMDD;
+                                    msg = "Magnet and PIR alarm:\t" + nowYYYYMMDD;
                                 }
 
                                 events.add(msg);
@@ -270,7 +262,6 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
 
 
     /**

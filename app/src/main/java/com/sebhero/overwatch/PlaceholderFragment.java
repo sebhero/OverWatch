@@ -1,7 +1,7 @@
 package com.sebhero.overwatch;
 
 /**
- * Created by trevl on 2017-02-17.
+ * @author Sebastian Boreback
  */
 
 import android.os.Bundle;
@@ -16,7 +16,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 
 /**
- * A placeholder fragment containing a simple view.
+ * A placeholder fragment for all notifications
  */
 public class PlaceholderFragment extends Fragment {
     /**
